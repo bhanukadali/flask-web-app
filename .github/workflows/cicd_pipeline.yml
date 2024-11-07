@@ -54,9 +54,4 @@ jobs:
 
     - name: Run Ansible Playbook
       run: |
-        ansible-playbook -i $ANSIBLE_HOSTS_PATH $ANSIBLE_PLAYBOOK_PATH
-      env:
-        ANSIBLE_HOSTS_PATH: "/home/ubuntu/hosts.ini"
-        ANSIBLE_PLAYBOOK_PATH: ${{ github.event.inputs.ansible_playbook_path }}
-        DOCKERHUB_USERNAME: ${{ github.event.inputs.dockerhub_username }}
-        DOCKERHUB_PASSWORD: ${{ github.event.inputs.dockerhub_password }}
+        ansible-playbook -i /home/ubuntu/hosts.ini  /home/ubuntu/ansible-playbooks/deploy_docker.yml
