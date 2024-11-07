@@ -44,11 +44,11 @@ jobs:
 
     - name: Build Docker Image
       run: |
-        docker build -t $DOCKERHUB_USERNAME/testing:flaskimage .
+        docker build -t ravinadh/testing:flaskimage .
 
     - name: Push Docker Image to DockerHub
       run: |
-        docker push $DOCKERHUB_USERNAME/testing:flaskimage
+        docker push ravinadh/testing:flaskimage
 
     - name: Run Ansible Playbook
       run: |
