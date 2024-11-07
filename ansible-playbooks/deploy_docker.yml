@@ -21,13 +21,13 @@
 
     - name: Pull the Docker image
       docker_image:
-        name: ravinadh/testing:flaskimage
+        name: bhanukadali1998/testing:flaskimage
         source: pull
 
     - name: Run the Docker container
       docker_container:
         name: flask_container
-        image: ravinadh/testing:flaskimage
+        image: bhanukadali1998/testing:flaskimage
         state: started
         ports:
           - "5000:5000"
