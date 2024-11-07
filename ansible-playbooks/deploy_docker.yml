@@ -1,0 +1,41 @@
+---
+- name: Automate Docker Container Deployment
+  hosts: ec2
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install Docker if not present
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull the Docker image
+      docker_image:
+        name: ravinadh/testing:flaskimage
+        source: pull
+
+    - name: Run the Docker container
+      docker_container:
+        name: flask_container
+        image: ravinadh/testing:flaskimage
+        state: started
+        ports:
+          - "5000:5000"
+        restart_policy: always
+
+    - name: Set environment variable in Docker container
+      docker_container:
+        name: flask_container
+        env:
+          FLASK_ENV: development
+
