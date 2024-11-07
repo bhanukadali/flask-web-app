@@ -1,0 +1,60 @@
+name: Flask CI/CD Pipeline
+
+on:
+  workflow_dispatch:  # Enable manual trigger from the GitHub interface
+    inputs:
+      dockerhub_username:
+        description: 'DockerHub Username'
+        required: true
+        default: 'ravinadh'
+      dockerhub_password:
+        description: 'DockerHub Password'
+        required: true
+        default: 'Cloud@12345'
+      ansible_playbook_path:
+        description: 'Path to the Ansible Playbook'
+        required: true
+        default: '/home/ubuntu/ansible-playbooks/deploy_docker.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Tests
+      run: |
+        pytest
+
+    - name: Login to DockerHub
+      run: |
+        echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
+    - name: Build Docker Image
+      run: |
+        docker build -t $DOCKERHUB_USERNAME/testing:flaskimage .
+
+    - name: Push Docker Image to DockerHub
+      run: |
+        docker push $DOCKERHUB_USERNAME/testing:flaskimage
+
+    - name: Run Ansible Playbook
+      run: |
+        ansible-playbook -i $ANSIBLE_HOSTS_PATH $ANSIBLE_PLAYBOOK_PATH
+      env:
+        ANSIBLE_HOSTS_PATH: "/home/ubuntu/hosts.ini"
+        ANSIBLE_PLAYBOOK_PATH: ${{ github.event.inputs.ansible_playbook_path }}
+        DOCKERHUB_USERNAME: ${{ github.event.inputs.dockerhub_username }}
+        DOCKERHUB_PASSWORD: ${{ github.event.inputs.dockerhub_password }}
