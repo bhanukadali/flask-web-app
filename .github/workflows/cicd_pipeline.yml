@@ -48,7 +48,7 @@ jobs:
     - name: Push Docker Image to DockerHub
       uses: docker/build-push-action@v4
       with:
-          context: .
+          context: myproject
           file: myproject/Dockerfile
           tags: ravinadh/testing:flask
 
