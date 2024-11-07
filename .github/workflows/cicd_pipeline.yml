@@ -6,7 +6,7 @@ on:
       dockerhub_username:
         description: 'DockerHub Username'
         required: true
-        default: 'ravinadh'
+        default: 'kadali'
       dockerhub_password:
         description: 'DockerHub Password'
         required: true
