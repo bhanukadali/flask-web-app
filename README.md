@@ -1,8 +1,8 @@
 
-**process**
-<h1>Create an Ec2 server  with ubuntu operating system </h1> 
-<h1>Install the required package and tools like python flask, docker, ansibel</h1>
-<h1>In order to  see the webapplication  result we need t enbale the ort number 5000 in the security  group and access by  using its **ipv4 ip:5000**</h1>
+<h1>Process</h1>
+<h2>Create an Ec2 server  with ubuntu operating system </h2> 
+<h2>Install the required package and tools like python flask, docker, ansibel</h2>
+<h2>In order to  see the webapplication  result we need t enbale the ort number 5000 in the security  group and access by  using its **ipv4 ip:5000**</h2>
 
 
 
