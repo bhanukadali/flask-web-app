@@ -2,19 +2,7 @@ name: Flask CI/CD Pipeline
 
 on:
   workflow_dispatch:  # Enable manual trigger from the GitHub interface
-    inputs:
-      dockerhub_username:
-        description: 'DockerHub Username'
-        required: true
-        default: 'kadali'
-      dockerhub_password:
-        description: 'DockerHub Password'
-        required: true
-        default: 'Cloud@12345'
-      ansible_playbook_path:
-        description: 'Path to the Ansible Playbook'
-        required: true
-        default: '/home/ubuntu/ansible-playbooks/deploy_docker.yml'
+    
 
 jobs:
   build:
