@@ -17,14 +17,14 @@
     
     - name: Pull Docker image from Docker Hub
       docker_image:
-        name: ravinadh/webserver
-        tag: flask_helloworldimage
+        name: bhanukadali1998/webapplication
+        tag: flaskimage
         source: pull
     
     - name: Run Flask application container
       docker_container:
         name: flask_app
-        image: ravinadh/webserver:flask_helloworldimage
+        image: bhanukadali1998/webapplication:flaskimage
         state: started
         restart_policy: always
         published_ports:
